@@ -85,23 +85,24 @@ export default {
       this.$modal.show('createItem');
     },
     addItem(item) {
+      let id = Math.random().toString(36).substring(7);
       item.creator = this.name;
-      this.items.push(item);
+      item.id = id;
       this.$modal.hide('createItem');
+      db.ref('toDoList/' + id)
+      .set(item)
     },
     selectItemToEdit(item) {
       this.itemToEdit = item;
       this.$modal.show('createItem');
     },
     updateItem(updatedItem) {
-      updatedItem.creator = this.name;
-      let index = this.items.map(item => item.title).indexOf(this.itemToEdit.title);
-      this.items.splice(index, 1, updatedItem)
+      db.ref('toDoList/' + updatedItem.id)
+      .update(updatedItem)
       this.$modal.hide('createItem');
     },
     deleteItem(itemToDelete) {
-      let index = this.items.map(item => item.title).indexOf(itemToDelete.title);
-      this.items.splice(index, 1)
+      db.ref('toDoList/' + itemToDelete.id).remove()
     }
   },
 }
