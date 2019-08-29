@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top:25px;">
     <h2 v-if="items.length === 0">No Items In List</h2>
-    <div v-for="item in items" class="card">
+    <div v-for="item in items" class="card" v-bind:key="item.title">
       <div class="topSide">
         <div class="cardHeader">
           <h4 style="margin:5px;">Title: {{ item.title }}</h4>
@@ -31,14 +31,11 @@
 
 <script>
 
-import Datepicker from 'vuejs-datepicker';
-
 
 export default {
   name: 'AddItem',
   props: ['items'],
   components: {
-    Datepicker
   },
   data() {
     return {
