@@ -2,7 +2,7 @@
   <div style="padding: 20px; margin: auto; width: 200px">
     Enter Your Name <br/>
     <input class="textInput" type="text" v-model="name"><br>
-    <div class="button" v-on:click="emitLogin()">Login</div>
+    <input type="submit" value="Submit" v-on:click="emitLogin()">
   </div>
 </template>
 
@@ -31,18 +31,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.button {
-  border-radius: 6px;
-  color: white;
-  width: 100px;
-  height: 30px;
-  background-color: #1cc91c;
-  text-align: center;
-  margin-top: 20px;
-}
-.textInput {
-  border: none;
-  border-bottom: 1px solid black;
-}
 </style>
