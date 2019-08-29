@@ -26,13 +26,11 @@
 
 import AddItem from './AddItem.vue'
 import itemList from './itemList.vue'
-
+import { db } from '../db'
 
 export default {
   name: 'ToDoApp',
-  props: {
-    name: String
-  },
+  props: ['name'],
   components: {
     AddItem,
     itemList,
@@ -45,9 +43,30 @@ export default {
       showFilteredItems: false,
       itemToEdit: null,
       status: 'All',
+      documents: [],
     }
   },
+  firebase: {
+    documents: db.ref('toDoList'),
+  },
   mounted() {
+    db.ref('toDoList').on("child_added", (snapshot) => {
+      var newPost = snapshot.val();
+      this.items.push(newPost)
+    });
+
+    db.ref('toDoList').on("child_changed", (snapshot) => {
+      var changedPost = snapshot.val();
+      let index = this.items.map(item => item.title).indexOf(changedPost.title);
+      this.items.splice(index, 1, changedPost)
+    } );
+
+
+    db.ref('toDoList').on("child_removed", (snapshot) => {
+      var deletedPost = snapshot.val();
+      let index = this.items.map(item => item.title).indexOf(deletedPost.title);
+      this.items.splice(index, 1)
+    });
   },
   methods: {
     filterStatus() {
