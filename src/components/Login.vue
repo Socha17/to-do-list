@@ -23,7 +23,6 @@ export default {
         this.$noty.error("Oops, Please Enter A Name")
         return
       }
-      console.log(this.name);
       this.$parent.$parent.login(this.name)
     },
   },

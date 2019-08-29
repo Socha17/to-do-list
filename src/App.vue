@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ToDoApp/>
+    <ToDoApp v-if="userLoggedIn" :name="name"/>
     <modal name="login" width="85%" height="auto" class="customModal">
       <Login/>
     </modal>
@@ -19,7 +19,8 @@ export default {
   },
   data() {
     return {
-      showLogin: true,
+      userLoggedIn: false,
+      name: null,
     }
   },
   mounted() {
@@ -28,6 +29,7 @@ export default {
   methods: {
     login(name) {
       this.name = name
+      this.userLoggedIn = true;
       this.$modal.hide('login');
     }
   }

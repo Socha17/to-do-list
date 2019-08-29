@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
-    <h1>To Do List</h1>
+    <h1>Welcome {{name}}</h1>
+    <h3>This is your to do list</h3>
+
+    
   </div>
 </template>
 
@@ -8,8 +11,14 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
-  }
+    name: String
+  },
+  mounted() {
+    console.log("toDoApp");
+    console.log(this.name);
+  },
+  methods: {
+  },
 }
 </script>
 
