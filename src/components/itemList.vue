@@ -19,10 +19,10 @@
       </div>
       <div class="listItem">
         <div>
-          <input type="submit" style="width:100%;" value="Edit Item" v-on:click="showAddItemModal()">
+          <input type="submit" style="width:100%;" value="Edit Item" v-on:click="emitEditItem(item)">
         </div>
         <div>
-          <input type="submit" style="width:100%; background-color:red;" value="Delete Item" v-on:click="showAddItemModal()">
+          <input type="submit" style="width:100%; background-color:red;" value="Delete Item" v-on:click="emitDeleteItem(item)">
         </div>
       </div>
     </div>
@@ -48,7 +48,9 @@ export default {
 
   },
   methods: {
-
+    emitEditItem(item) {
+      this.$parent.selectItemToEdit(item)
+    }
   },
 }
 </script>
