@@ -4,7 +4,9 @@
     <h3>This is your to do list</h3>
 
     <input type="submit" value="Add Item" v-on:click="showAddItemModal()">
-    <modal name="createItem" width="85%" height="600px" scrollable="true">
+
+    <itemList :items="items"/>
+    <modal name="createItem" width="85%" height="600px">
       <AddItem/>
     </modal>
   </div>
@@ -13,23 +15,34 @@
 <script>
 
 import AddItem from './AddItem.vue'
+import itemList from './itemList.vue'
 
 
 export default {
-  name: 'HelloWorld',
+  name: 'ToDoApp',
   props: {
     name: String
   },
   components: {
     AddItem,
+    itemList,
+  },
+  data() {
+    return {
+      items: []
+    }
   },
   mounted() {
-    console.log("toDoApp");
-    console.log(this.name);
   },
   methods: {
     showAddItemModal() {
       this.$modal.show('createItem');
+    },
+    addItem(item) {
+      item.creator = this.name
+      console.log(item);
+      this.items.push(item);
+      this.$modal.hide('createItem');
     }
   },
 }
