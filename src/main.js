@@ -9,6 +9,8 @@ Vue.use(VueNoty)
 
 Vue.config.productionTip = false
 
+import 'vuejs-noty/dist/vuejs-noty.css'
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')
