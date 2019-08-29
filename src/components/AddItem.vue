@@ -13,7 +13,7 @@
       <option value="In Progress">In Progress</option>
       <option value="Done">Done</option>
     </select>
-    <input type="submit" value="Submit" v-on:click="emitAdditem()">
+    <input type="submit" :value="itemToEdit ? 'Update' : 'Add'" v-on:click="emitAdditem()">
   </div>
 </template>
 
@@ -24,7 +24,7 @@ import Datepicker from 'vuejs-datepicker';
 
 export default {
   name: 'AddItem',
-  props: {  },
+  props: ['itemToEdit'],
   components: {
     Datepicker
   },
@@ -37,6 +37,14 @@ export default {
     }
   },
   mounted() {
+    console.log("mounted");
+    console.log(this.itemToEdit);
+    if (this.itemToEdit) {
+      this.title = this.itemToEdit.title;
+      this.date = this.itemToEdit.date;
+      this.status = this.itemToEdit.status;
+      this.title = this.itemToEdit.title;
+    }
   },
   methods: {
     emitAdditem() {
@@ -45,7 +53,12 @@ export default {
         return
       }
       let item = {title: this.title, status: this.status, description: this.description, date: this.date}
-      this.$parent.$parent.addItem(item)
+      if (this.itemToEdit) {
+        console.log("update item");
+        this.$parent.$parent.updateItem(item)
+      } else {
+        this.$parent.$parent.addItem(item)
+      }
     },
   },
 }
