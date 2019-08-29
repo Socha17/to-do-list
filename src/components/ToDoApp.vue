@@ -7,6 +7,14 @@
 
     <span v-if="items.length !== 0">Search:</span>
     <input v-if="items.length !== 0" class="textInput" type="text" v-model="searchFilter" @input="filterItems"><br>
+
+    <span v-if="items.length !== 0">Filter status:</span>
+    <select v-model="status" v-if="items.length !== 0" @change="filterStatus">
+      <option value="All">All</option>
+      <option value="Idle">Idle</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Done">Done</option>
+    </select>
     <itemList :items="showFilteredItems ? searchedItems : items"/>
     <modal name="createItem" width="85%" height="600px">
       <AddItem :itemToEdit="itemToEdit"/>
@@ -36,11 +44,18 @@ export default {
       searchFilter: '',
       showFilteredItems: false,
       itemToEdit: null,
+      status: 'All',
     }
   },
   mounted() {
   },
   methods: {
+    filterStatus() {
+      this.status !== 'All' ? this.showFilteredItems = true : this.showFilteredItems = false;
+      this.searchedItems = this.items.filter((item) => {
+        return item.status.toLowerCase().indexOf(this.status.toLowerCase()) !== -1;
+      });
+    },
     filterItems() {
       this.searchFilter !== '' ? this.showFilteredItems = true : this.showFilteredItems = false;
       this.searchedItems = this.items.filter((item) => {
