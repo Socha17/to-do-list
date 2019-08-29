@@ -37,8 +37,6 @@ export default {
     }
   },
   mounted() {
-    console.log("mounted");
-    console.log(this.itemToEdit);
     if (this.itemToEdit) {
       this.title = this.itemToEdit.title;
       this.date = this.itemToEdit.date;

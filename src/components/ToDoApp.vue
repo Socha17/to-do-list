@@ -64,6 +64,10 @@ export default {
       let index = this.items.map(item => item.title).indexOf(this.itemToEdit.title);
       this.items.splice(index, 1, updatedItem)
       this.$modal.hide('createItem');
+    },
+    deleteItem(itemToDelete) {
+      let index = this.items.map(item => item.title).indexOf(itemToDelete.title);
+      this.items.splice(index, 1)
     }
   },
 }

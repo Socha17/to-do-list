@@ -50,6 +50,9 @@ export default {
   methods: {
     emitEditItem(item) {
       this.$parent.selectItemToEdit(item)
+    },
+    emitDeleteItem(item) {
+      this.$parent.deleteItem(item)
     }
   },
 }
