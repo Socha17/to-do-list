@@ -30,6 +30,7 @@ export default {
   },
   data() {
     return {
+      id: '',
       title: '',
       status: 'Idle',
       description: '',
@@ -38,8 +39,10 @@ export default {
   },
   mounted() {
     if (this.itemToEdit) {
+      this.id = this.itemToEdit.id;
       this.title = this.itemToEdit.title;
-      this.date = this.itemToEdit.date;
+      this.description = this.itemToEdit.description;
+      this.date = JSON.parse(this.itemToEdit.date);
       this.status = this.itemToEdit.status;
       this.title = this.itemToEdit.title;
     }
@@ -50,7 +53,7 @@ export default {
         this.$noty.error("Oops, Please Enter A Title")
         return
       }
-      let item = {title: this.title, status: this.status, description: this.description, date: this.date}
+      let item = {id: this.id, title: this.title, status: this.status, description: this.description, date: JSON.stringify(this.date)}
       if (this.itemToEdit) {
         this.$parent.$parent.updateItem(item)
       } else {

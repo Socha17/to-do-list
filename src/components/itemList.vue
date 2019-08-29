@@ -12,7 +12,7 @@
           <h4 style="margin:5px;">Staus: {{ item.status }}</h4>
         </div>
         <div class="cardHeader">
-          <h4 style="margin:5px;">Due Date: {{ item.date | moment("dddd, MMMM Do YYYY") }}</h4>
+          <h4 style="margin:5px;">Due Date: {{ JSON.parse(item.date) | moment("dddd, MMMM Do YYYY") }}</h4>
         </div>
       </div>
       <div class="listItem">
