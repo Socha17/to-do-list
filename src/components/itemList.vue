@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top:25px;">
     <h2 v-if="items.length === 0">No Items In List</h2>
-    <div v-for="item in items" class="card" v-bind:key="item.title">
+    <div v-for="item in items" class="card" v-bind:key="item.id">
       <div class="topSide">
         <div class="cardHeader">
           <h4 style="margin:5px;">Title: {{ item.title }}</h4>
