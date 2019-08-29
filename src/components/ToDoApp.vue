@@ -1,13 +1,11 @@
 <template>
   <div class="container">
     <h1>Welcome {{name}}</h1>
-    <h3>This is your to do list</h3>
+    <h3>This is your Teams to do list</h3>
 
     <input type="submit" value="Add Item" v-on:click="showAddItemModal()">
-
     <span v-if="items.length !== 0">Search:</span>
     <input v-if="items.length !== 0" class="textInput" type="text" v-model="searchFilter" @input="filterItems"><br>
-
     <span v-if="items.length !== 0">Filter status:</span>
     <select v-model="status" v-if="items.length !== 0" @change="filterStatus">
       <option value="All">All</option>
@@ -15,8 +13,10 @@
       <option value="In Progress">In Progress</option>
       <option value="Done">Done</option>
     </select>
+
     <itemList :items="showFilteredItems ? searchedItems : items"/>
-    <modal name="createItem" width="85%" height="600px">
+    
+    <modal name="createItem" width="85%" height="600px" @before-close="itemToEdit = null">
       <AddItem :itemToEdit="itemToEdit"/>
     </modal>
   </div>
