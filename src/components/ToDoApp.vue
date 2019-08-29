@@ -5,7 +5,9 @@
 
     <input type="submit" value="Add Item" v-on:click="showAddItemModal()">
 
-    <itemList :items="items"/>
+    <span v-if="items.length !== 0">Search:</span>
+    <input v-if="items.length !== 0" class="textInput" type="text" v-model="searchFilter" @input="filterItems"><br>
+    <itemList :items="showFilteredItems ? searchedItems : items"/>
     <modal name="createItem" width="85%" height="600px">
       <AddItem/>
     </modal>
@@ -29,18 +31,26 @@ export default {
   },
   data() {
     return {
-      items: []
+      items: [],
+      searchedItems: [],
+      searchFilter: '',
+      showFilteredItems: false,
     }
   },
   mounted() {
   },
   methods: {
+    filterItems() {
+      this.searchFilter !== '' ? this.showFilteredItems = true : this.showFilteredItems = false;
+      this.searchedItems = this.items.filter((item) => {
+        return item.title.toLowerCase().indexOf(this.searchFilter.toLowerCase()) !== -1;
+      });
+    },
     showAddItemModal() {
       this.$modal.show('createItem');
     },
     addItem(item) {
       item.creator = this.name
-      console.log(item);
       this.items.push(item);
       this.$modal.hide('createItem');
     }
