@@ -4,7 +4,7 @@
     Title:
     <input class="textInput" type="text" v-model="title"><br>
     Due Date:
-    <datepicker :value="date"></datepicker>
+    <datepicker v-model="date"></datepicker>
     Description:
     <input class="textInput" type="text" v-model="description"><br>
     Staus:
@@ -54,7 +54,6 @@ export default {
       }
       let item = {title: this.title, status: this.status, description: this.description, date: this.date}
       if (this.itemToEdit) {
-        console.log("update item");
         this.$parent.$parent.updateItem(item)
       } else {
         this.$parent.$parent.addItem(item)
