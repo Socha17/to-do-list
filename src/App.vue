@@ -23,8 +23,13 @@ export default {
     }
   },
   mounted() {
-
     this.$modal.show('login');
+  },
+  methods: {
+    login(name) {
+      this.name = name
+      this.$modal.hide('login');
+    }
   }
 }
 </script>
@@ -40,11 +45,5 @@ export default {
 }
 .customModal {
   padding: 20px;
-}
-.button {
-  color: white;
-  width: 100px;
-  height: 50px;
-  background-color: green;
 }
 </style>
