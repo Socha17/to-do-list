@@ -9,7 +9,7 @@
     <input v-if="items.length !== 0" class="textInput" type="text" v-model="searchFilter" @input="filterItems"><br>
     <itemList :items="showFilteredItems ? searchedItems : items"/>
     <modal name="createItem" width="85%" height="600px">
-      <AddItem/>
+      <AddItem :itemToEdit="itemToEdit"/>
     </modal>
   </div>
 </template>
@@ -35,6 +35,7 @@ export default {
       searchedItems: [],
       searchFilter: '',
       showFilteredItems: false,
+      itemToEdit: null,
     }
   },
   mounted() {
@@ -50,8 +51,18 @@ export default {
       this.$modal.show('createItem');
     },
     addItem(item) {
-      item.creator = this.name
+      item.creator = this.name;
       this.items.push(item);
+      this.$modal.hide('createItem');
+    },
+    selectItemToEdit(item) {
+      this.itemToEdit = item;
+      this.$modal.show('createItem');
+    },
+    updateItem(updatedItem) {
+      updatedItem.creator = this.name;
+      let index = this.items.map(item => item.title).indexOf(this.itemToEdit.title);
+      this.items.splice(index, 1, updatedItem)
       this.$modal.hide('createItem');
     }
   },
